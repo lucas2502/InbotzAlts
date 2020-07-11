@@ -28,6 +28,18 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+
+## About doc API to request exchanfe
+
+- Binance https://binance-docs.github.io/apidocs/spot/en/#change-log
+- Okex https://www.okex.com/docs/en/
+- Huobi https://huobiapi.github.io/docs/spot/v1/cn/
+- Mercado Bitcoin https://www.mercadobitcoin.com.br/api-doc
+- Bitcointrade https://apidocs.bitcointrade.com.br/?version=latest
+
+## Installation
+
+
 ## Installation
 
 ```bash
