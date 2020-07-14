@@ -1,5 +1,4 @@
 import { Document } from 'mongoose';
-import * as mongoose from 'mongoose';
 
 export enum Symbol {
     ADABTC = 'ADABTC',
@@ -11,17 +10,13 @@ export interface BinanceBookTicker extends Document {
     readonly askQty: number;
     readonly bidPrice: number;
     readonly bidQty: number;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     readonly symbol: Symbol;
-    //readonly typeUser: object;
-    //readonly dateAt: Date;
-    //readonly dateUpdate: Date;
 }
 
 export interface BinanceTickerPrice extends Document {
     readonly price: number;
+    // eslint-disable-next-line @typescript-eslint/ban-types
     readonly symbol: Symbol;
-    //readonly typeUser: object;
-    //readonly dateAt: Date;
-    //readonly dateUpdate: Date;
 }
 
