@@ -3,6 +3,7 @@ import { Interval } from '@nestjs/schedule';
 import { BinanceService } from 'src/core/service/Binace/Binance.service';
 import { OkexService } from 'src/core/service/Okex/Okex.service';
 import { HoubiService } from 'src/core/service/Huobi/Houbi.service';
+import { MercadoBitcoinService } from 'src/core/service/MercadoBitcoin/MercadoBitcoin.service';
 
 /* const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
@@ -21,6 +22,7 @@ export class CronService {
     private readonly binanceService: BinanceService,
     private readonly okexService: OkexService,
     private readonly houbiService: HoubiService,
+    private readonly mercadoBitcoinService: MercadoBitcoinService,
   ) {}
 
   @Interval(parseInt(process.env.INTERVAL) || 10000)
@@ -47,10 +49,12 @@ export class CronService {
       const tOkex = await this.okexService.getPairTicker(pair1, pair2);
       const tBinance = await this.binanceService.getPairTicker(pair1, pair2);
       const tHoubi = await this.houbiService.getPairTicker(pair1, pair2);
+      const tMercadoBitcoin = await this.mercadoBitcoinService.getPairTicker('LTC', pair2);
 
       console.log('tOkex>>', tOkex);
       console.log('tBinance>>', tBinance);
       console.log('tHoubi>>', tHoubi);
+      console.log('tMercadoBitcoin>>', tMercadoBitcoin);
 
       /* const data = [
         {

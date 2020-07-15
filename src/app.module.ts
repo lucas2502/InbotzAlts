@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BinanceModule } from './core/service/Binace/Binance.module';
 import { OkexModule } from './core/service/Okex/Okex.module';
 import { HoubiModule } from './core/service/Huobi/Houbi.module';
+import { MercadoBitcoinModule } from './core/service/MercadoBitcoin/MercadoBitcoin.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import config from './config/keys';
 import { CronModule } from './app/Cron/Cron.module'
@@ -22,7 +23,8 @@ import { CronModule } from './app/Cron/Cron.module'
     BinanceModule,
     OkexModule,
     CronModule,
-    HoubiModule,  
+    HoubiModule,
+    MercadoBitcoinModule,  
     ],
   controllers: [],
   providers: [],
