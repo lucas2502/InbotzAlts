@@ -1,7 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { OkexService } from './Okex.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { OkexSchema } from './schema/Okex.schema';
+import { OkexBookPriceSchema } from './schema/Okex.schema';
 import { OkexController } from './Okex.controller';
 
 
@@ -9,7 +9,7 @@ import { OkexController } from './Okex.controller';
   imports: [
       HttpModule,
       MongooseModule.forFeature([
-        { name: 'Okex', schema: OkexSchema}
+        { name: 'OkexBookPrice', schema: OkexBookPriceSchema}
       ])
     ],
   controllers: [OkexController],

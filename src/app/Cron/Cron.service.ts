@@ -48,13 +48,13 @@ export class CronService {
       const pair2 = 'BTC';
       const tOkex = await this.okexService.getPairTicker(pair1, pair2);
       const tBinance = await this.binanceService.getPairTicker(pair1, pair2);
-      const tHoubi = await this.houbiService.getPairTicker(pair1, pair2);
-      const tMercadoBitcoin = await this.mercadoBitcoinService.getPairTicker('LTC', pair2);
+     /*  const tHoubi = await this.houbiService.getPairTicker(pair1, pair2);
+      const tMercadoBitcoin = await this.mercadoBitcoinService.getPairTicker('LTC', pair2); */
 
       console.log('tOkex>>', tOkex);
       console.log('tBinance>>', tBinance);
-      console.log('tHoubi>>', tHoubi);
-      console.log('tMercadoBitcoin>>', tMercadoBitcoin);
+      /* console.log('tHoubi>>', tHoubi);
+      console.log('tMercadoBitcoin>>', tMercadoBitcoin); */
 
       /* const data = [
         {

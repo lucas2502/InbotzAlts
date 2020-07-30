@@ -5,7 +5,7 @@ export enum Symbol {
     ETHBTC =  'ETHBTC',
 }
 
-export interface BinanceBookTicker extends Document {
+export interface BookTicker extends Document {
     readonly askPrice: number;
     readonly askQty: number;
     readonly bidPrice: number;
@@ -14,7 +14,7 @@ export interface BinanceBookTicker extends Document {
     readonly symbol: Symbol;
 }
 
-export interface BinanceTickerPrice extends Document {
+export interface TickerPrice extends Document {
     readonly price: number;
     // eslint-disable-next-line @typescript-eslint/ban-types
     readonly symbol: Symbol;

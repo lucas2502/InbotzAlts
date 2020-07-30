@@ -1,8 +1,9 @@
-import { InjectModel } from "@nestjs/mongoose";
-import { HttpService, Injectable, Inject  } from '@nestjs/common';
 import { Model } from 'mongoose'
+import { HttpService, Injectable  } from '@nestjs/common';
+import { InjectModel } from "@nestjs/mongoose";
+
 import { createHmac } from 'crypto';
-import { BinanceBookTicker, BinanceTickerPrice, Symbol } from "./interface/Binance.interface";
+import { BookTicker, TickerPrice, Symbol } from "./interface/Binance.interface";
 import { BinanceBookTickerDTO, BinanceTickerPriceDTO } from './dto/Binance.dto'
 
 
@@ -47,34 +48,40 @@ export class BinanceService {
     private PRIVATE_API_BASE = null;
     
     constructor(
-      //@InjectModel('BinanceBookTickers') private binanceBookTickerModel: Model<BinanceBookTicker>,
-      private httpService: HttpService,  
-      // @InjectModel('BinanceTickerPrice') private binanceTickerPriceModel: Model<BinanceTickerPrice> 
+      private readonly httpService: HttpService,
+      @InjectModel('BinanceBookPrice') private bookTickerModel: Model<BookTicker> ,
+      @InjectModel('BinanceTickerPrice') private tickerPriceModel: Model<TickerPrice> 
     ){
         this.PUBLIC_API_BASE = process.env.BINANCE_PUBLIC_API_BASE;
         this.PRIVATE_API_BASE = process.env.BINANCE_PRIVATE_API_BASE;
     }
     
-     async getPrice(): Promise<BinanceTickerPrice> {
+     async getPrice(): Promise<TickerPrice> {
         const res = await this.httpService.get(`${this.PUBLIC_API_BASE}/v3/ticker/price`).toPromise();
         // console.log('getPrice>>>>>>>', res)
+        this.saveTickerPrice(res.data)
         return res.data;
       }
+
+      async saveTickerPrice(createTickerPrice: BinanceTickerPriceDTO): Promise<TickerPrice>{
+        const tickerPrice = new this.tickerPriceModel(createTickerPrice)
+        return await tickerPrice.save()
+      }
     
-      async getPairTicker(pair1: string, pair2: string): Promise<BinanceBookTicker> {
+      async getPairTicker(pair1: string, pair2: string): Promise<BookTicker> {
         const res = await this.httpService
           .get(
             `${this.PUBLIC_API_BASE}/v3/ticker/bookTicker?symbol=${pair1}${pair2}`
           )
           .toPromise();
-         /*  // this.savePairTicker(res.data) */
-          return res.data;
+          this.savePairTicker(res.data)
+          return await res.data;
       }
 
-      /* async savePairTicker(createBookTicker: BinanceBookTickerDTO): Promise<BinanceBookTicker>{
-        const savePairTicker = new this.binanceBookTickerModel(createBookTicker)
-        return await savePairTicker.save()
-      } */
+      async savePairTicker(createBookTicker: BinanceBookTickerDTO): Promise<BookTicker>{
+        const bookTicker = new this.bookTickerModel(createBookTicker)
+        return await bookTicker.save()
+      }
     
       getBalances() {
         const signed = _getBinanceCallSigned();

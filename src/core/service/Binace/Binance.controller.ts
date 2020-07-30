@@ -2,7 +2,7 @@
 import { Controller, Post, Get, Delete, Put, Res, NotFoundException, Param, Body, UseGuards} from '@nestjs/common';
 // import { BinanceDTO } from './dto/Binance.dto';
 import { BinanceService } from './Binance.service';
-import {  BinanceBookTicker, BinanceTickerPrice } from './interface/Binance.interface';
+import {  BookTicker, TickerPrice } from './interface/Binance.interface';
 @Controller('binance')
 export class BinanceController {
 
@@ -11,7 +11,7 @@ export class BinanceController {
     ){}
 
     @Get('/price')
-    async getPrice(@Res() res): Promise<BinanceTickerPrice[]>{
+    async getPrice(@Res() res): Promise<TickerPrice[]>{
         const data = await this.binanceService.getPrice()
 
         if(!data){
@@ -24,7 +24,7 @@ export class BinanceController {
     }
 
     @Get('/pairTicker')
-    async getPairTicker(@Res() res): Promise<BinanceTickerPrice[]>{
+    async getPairTicker(@Res() res): Promise<BookTicker[]>{
         const data = await this.binanceService.getPairTicker('ADA', 'BTC')
 
         if(!data){

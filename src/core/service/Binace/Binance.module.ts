@@ -1,7 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { BinanceService } from './Binance.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BinanceSchema } from './schema/Binance.schema';
+import { BinanceBookPriceSchema, BinanceTickerPriceSchema } from './schema/Binance.schema';
 import { BinanceController } from './Binance.controller';
 
 
@@ -9,9 +9,10 @@ import { BinanceController } from './Binance.controller';
   imports: [
       HttpModule,
       MongooseModule.forFeature([
-        { name: 'Binance', schema: BinanceSchema}
+        { name: 'BinanceBookPrice', schema: BinanceBookPriceSchema},
+        { name: 'BinanceTickerPrice', schema: BinanceTickerPriceSchema}
       ])
-    ],
+  ],
   controllers: [BinanceController],
   providers: [BinanceService],
   exports: [BinanceService],

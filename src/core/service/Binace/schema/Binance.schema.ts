@@ -1,30 +1,19 @@
 /* import * as bcrypt from 'bcrypt'; */
-import { Schema } from 'mongoose'
 
+import * as mongoose from 'mongoose';
 
+export const BinanceBookPriceSchema = new mongoose.Schema({
+    askPrice: String ,
+    askQty: String ,
+    bidPrice: String ,
+    bidQty: String,
+    symbol: String ,
+})
 
-export const BinanceSchema = new Schema({
-    bookTicker: {
-        type: [{
-            askPrice: Number,
-            askQty: Number,
-            bidPrice: Number,
-            bidQty: Number,
-            symbol: String,
-        }]
-    },
-    tickerPrice: {
-        type: [{
-            price: Number,
-            symbol: String,
-        }],
-        /* required: true */
-    },
-    dateAt: {
-        type: Date,
-        default: Date.now
-    },
-    dateUpdate: {
-        type: Date
-    }
+export const BinanceTickerPriceSchema = new mongoose.Schema({
+    askPrice: String ,
+    askQty: String ,
+    bidPrice: String ,
+    bidQty: String,
+    symbol: String ,
 })

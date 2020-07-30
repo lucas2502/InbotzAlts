@@ -2,7 +2,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { HttpService, Injectable, Inject  } from '@nestjs/common';
 import { Model } from 'mongoose'
 import { createHmac } from 'crypto';
-import { OkexBookTicker, OkexTickerPrice, Symbol } from "./interface/Okex.interface";
+import { BookTicker, TickerPrice, Symbol } from "./interface/Okex.interface";
 import { OkexBookTickerDTO, OkexTickerPriceDTO } from './dto/Okex.dto'
 
 
@@ -42,12 +42,13 @@ export class OkexService {
     
     constructor(
       private httpService: HttpService,  
+      @InjectModel('OkexBookPrice') private bookTickerModel: Model<BookTicker>
     ){
         this.PUBLIC_API_BASE = process.env.OKEX_PUBLIC_API_BASE;
         this.PRIVATE_API_BASE = process.env.OKEX_PRIVATE_API_BASE;
     }
     
-     async getPrice(): Promise<OkexTickerPrice> {
+     async getPrice(): Promise<TickerPrice> {
         const res = await this.httpService.get(`${this.PUBLIC_API_BASE}/v2/spot/markets/important-index`).toPromise();
         // console.log('getPrice>>>>>>>', res)
         return res.data;
@@ -58,13 +59,14 @@ export class OkexService {
         const url = `${this.PUBLIC_API_BASE}${path}`;
 
         const res = await this.httpService.get(url).toPromise();
+        this.savePairTicker(res.data)
         return res.data;
       }
 
-      /* async savePairTicker(createBookTicker: OkexBookTickerDTO): Promise<OkexBookTicker>{
-        const savePairTicker = new this.binanceBookTickerModel(createBookTicker)
+      async savePairTicker(createBookTicker: OkexBookTickerDTO): Promise<BookTicker>{
+        const savePairTicker = new this.bookTickerModel(createBookTicker)
         return await savePairTicker.save()
-      } */
+      }
     
       async getBalances() {
         const comand = 'GET';

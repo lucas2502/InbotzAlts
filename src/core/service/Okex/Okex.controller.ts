@@ -2,7 +2,7 @@
 import { Controller, Post, Get, Delete, Put, Res, NotFoundException, Param, Body, UseGuards} from '@nestjs/common';
 // import { OkexDTO } from './dto/Okex.dto';
 import { OkexService } from './Okex.service';
-import {  OkexBookTicker, OkexTickerPrice } from './interface/Okex.interface';
+import {  BookTicker, TickerPrice } from './interface/Okex.interface';
 @Controller('okex')
 export class OkexController {
 
@@ -11,7 +11,7 @@ export class OkexController {
     ){}
 
     @Get('/price')
-    async getPrice(@Res() res): Promise<OkexTickerPrice[]>{
+    async getPrice(@Res() res): Promise<TickerPrice[]>{
         const data = await this.okexService.getPrice()
 
         if(!data){
@@ -24,7 +24,7 @@ export class OkexController {
     }
 
     @Get('/pairTicker')
-    async getPairTicker(@Res() res): Promise<OkexTickerPrice[]>{
+    async getPairTicker(@Res() res): Promise<BookTicker[]>{
         const data = await this.okexService.getPairTicker('ADA', 'BTC')
 
         if(!data){

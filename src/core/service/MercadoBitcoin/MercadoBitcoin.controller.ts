@@ -3,7 +3,7 @@ import { Controller, Post, Get, Delete, Put, Res, NotFoundException, Param, Body
 // import { MercadoBitcoinDTO } from './dto/MercadoBitcoin.dto';
 import { MercadoBitcoinService } from './MercadoBitcoin.service';
 import { MercadoBitcoinBookTicker, MercadoBitcoinTickerPrice } from './interface/MercadoBitcoin.interface';
-@Controller('houbi')
+@Controller('mercadobitcoin')
 export class MercadoBitcoinController {
 
     constructor(
