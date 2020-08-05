@@ -5,12 +5,18 @@ import { OkexModule } from 'src/core/service/Okex/Okex.module';
 import { HoubiModule } from 'src/core/service/Huobi/Houbi.module';
 import { MercadoBitcoinModule } from 'src/core/service/MercadoBitcoin/MercadoBitcoin.module';
 
+import { MongooseModule } from '@nestjs/mongoose';
+import { PairTicker } from './schema/Cron.schema';
+
 @Module({
   imports: [
       BinanceModule, 
       OkexModule,
       HoubiModule,
       MercadoBitcoinModule,
+      MongooseModule.forFeature([
+        { name: 'PairTicker', schema: PairTicker},
+      ])
     ],
   controllers: [],
   providers: [CronService],

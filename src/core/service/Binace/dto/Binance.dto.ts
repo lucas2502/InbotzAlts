@@ -2,10 +2,10 @@ import { IsNotEmpty, IsString, MinLength, MaxLength, IsObject, IsNumber } from '
 import {} from 'class-transformer'
 
 export class BinanceBookTickerDTO {
-    readonly askPrice: string;
-    readonly askQty: string;
-    readonly bidPrice: string;
-    readonly bidQty: string;
+    readonly askPrice: number;
+    readonly askQty: number;
+    readonly bidPrice: number;
+    readonly bidQty: number;
     readonly symbol: string;
 }
 
