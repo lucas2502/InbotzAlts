@@ -59,14 +59,14 @@ export class OkexService {
         const url = `${this.PUBLIC_API_BASE}${path}`;
 
         const res = await this.httpService.get(url).toPromise();
-        this.savePairTicker(res.data)
+        // this.savePairTicker(res.data)
         return res.data;
       }
 
-      async savePairTicker(createBookTicker: OkexBookTickerDTO): Promise<BookTicker>{
+     /*  async savePairTicker(createBookTicker: OkexBookTickerDTO): Promise<BookTicker>{
         const savePairTicker = new this.bookTickerModel(createBookTicker)
         return await savePairTicker.save()
-      }
+      } */
     
       async getBalances() {
         const comand = 'GET';

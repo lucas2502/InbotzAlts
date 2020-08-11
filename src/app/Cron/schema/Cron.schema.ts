@@ -10,3 +10,19 @@ export const PairTicker = new mongoose.Schema({
     date: { type: Date, default: Date.now },
 })
 
+export const CostOperationAsk = new mongoose.Schema({
+    costOperation: String,
+    bid: String,
+    ask: String,
+    exchangeBid: String,
+    exchangeAsk: String,
+    date: { type: Date, default: Date.now },
+})
+export const CostOperationBid = new mongoose.Schema({
+    costOperation: String,
+    bid: String,
+    ask: String,
+    exchangeBid: String,
+    exchangeAsk: String,
+    date: { type: Date, default: Date.now },
+})

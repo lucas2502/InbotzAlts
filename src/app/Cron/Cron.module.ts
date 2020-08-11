@@ -6,7 +6,7 @@ import { HoubiModule } from 'src/core/service/Huobi/Houbi.module';
 import { MercadoBitcoinModule } from 'src/core/service/MercadoBitcoin/MercadoBitcoin.module';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { PairTicker } from './schema/Cron.schema';
+import { CostOperationAsk, CostOperationBid, PairTicker } from './schema/Cron.schema';
 
 @Module({
   imports: [
@@ -16,6 +16,8 @@ import { PairTicker } from './schema/Cron.schema';
       MercadoBitcoinModule,
       MongooseModule.forFeature([
         { name: 'PairTicker', schema: PairTicker},
+        { name: 'CostOperationAsk', schema: CostOperationAsk},
+        { name: 'CostOperationBid', schema: CostOperationBid},
       ])
     ],
   controllers: [],
