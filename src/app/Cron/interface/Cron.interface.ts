@@ -16,6 +16,7 @@ export interface PairTicker extends Document {
 export interface CostOperationAsk extends Document {
     readonly bid: string;
     readonly ask: string;
+    readonly trade: number;
     readonly exchangeBid: string;
     readonly exchangeAsk: string;
     readonly costOperation:  string;
@@ -24,6 +25,7 @@ export interface CostOperationAsk extends Document {
 export interface CostOperationBid extends Document {
     readonly bid: string;
     readonly ask: string;
+    readonly trade: number;
     readonly exchangeBid: string;
     readonly exchangeAsk: string;
     readonly costOperation:  string;

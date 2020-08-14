@@ -58,14 +58,14 @@ export class CronService {
       const data = [
         {
           symbol: tBinance['symbol'],
-          bid: tBinance['bidPrice'],
-          ask: tBinance['askPrice'],
+          bid: parseFloat(`${tBinance['bidPrice']}`),
+          ask: parseFloat(`${tBinance['askPrice']}`),
           exchange: 'Binance',
         },
         {
           symbol: tOkex['product_id'],
-          bid: tOkex['bid'],
-          ask: tOkex['ask'],
+          bid: parseFloat(tOkex['bid']),
+          ask: parseFloat(tOkex['ask']),
           exchange: 'OKEX',
         }, 
       ] as PairTickerDTO[]; 
@@ -87,10 +87,14 @@ export class CronService {
   // Custo da operação Teste 1 = 0.075% * Valor_Ask_Binance + 0.15% * Valor_Bid_Okex
   async costOperationAsk(coin1 : PairTickerDTO, coin2 : PairTickerDTO): Promise<any>{
     try {
-      const CostOfOperation = 0.075 * coin1.ask + 0.15 * coin2.bid; 
+      const ask = coin1.ask * 100;
+      const bid = coin2.bid * 100;
+      const costOfOperation = (0.075 * ask) + (0.15 * bid); 
+      const trade = (ask - bid) - costOfOperation * 10000;
 
       const body = {
-        costOperation: CostOfOperation,
+        costOperation: costOfOperation,
+        trade: trade,
         bid: coin2.bid,
         ask: coin1.ask,
         exchangeBid: coin2.exchange,
@@ -109,10 +113,14 @@ export class CronService {
   // Custo da operação Teste 2 = 0.075% *Valor_Bid_Binance + 0.15% *  Valor_Ask_Okex
   async costOperationBid(coin2: PairTickerDTO, coin1: PairTickerDTO): Promise<any>{
     try {
-      const CostOfOperation = 0.075 * coin1.bid + 0.15 * coin2.ask;
 
+      const ask = coin1.ask * 100;
+      const bid = coin2.bid * 100;
+      const costOfOperation = (0.075 * bid) + (0.15 * ask);
+      const trade = ( ask - bid ) - costOfOperation * 10000;
       const body = {
-        costOperation: CostOfOperation,
+        costOperation: costOfOperation,
+        trade: trade,
         bid: coin1.bid,
         ask: coin2.ask,
         exchangeBid: coin1.exchange,
